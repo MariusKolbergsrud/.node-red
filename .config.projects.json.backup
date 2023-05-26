@@ -1,0 +1,7 @@
+{
+    "projects": {
+        "MyAirport": {
+            "credentialSecret": "BBCmyairport2023"
+        }
+    }
+}

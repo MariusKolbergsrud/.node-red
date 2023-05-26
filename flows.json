@@ -1,0 +1,254 @@
+[
+    {
+        "id": "3c7a0877.3968e8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "d105cfcc7d52fbe5",
+        "type": "cloudantplus",
+        "host": "https://609fcde5-68a8-4d31-8497-7a489006f7e0-bluemix.cloudant.com",
+        "name": "MyAirport-cloudant-test",
+        "useapikey": true
+    },
+    {
+        "id": "56cc5ac1.3421e4",
+        "type": "Db2",
+        "hostname": "377bd4ed-740f-4581-994e-ef6a28ed67ed.bv7e8rbf0shslbo0krsg.databases.appdomain.cloud",
+        "db": "bludb",
+        "port": "31074",
+        "name": "test DB2"
+    },
+    {
+        "id": "b1b11140.4e4ef",
+        "type": "inject",
+        "z": "3c7a0877.3968e8",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "topic": "",
+        "payload": "Hello Node-RED!",
+        "payloadType": "string",
+        "x": 141,
+        "y": 61,
+        "wires": [
+            [
+                "f2f2649a.0d0d98"
+            ]
+        ]
+    },
+    {
+        "id": "f2f2649a.0d0d98",
+        "type": "debug",
+        "z": "3c7a0877.3968e8",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 401,
+        "y": 87,
+        "wires": []
+    },
+    {
+        "id": "2908a815.3153e8",
+        "type": "inject",
+        "z": "3c7a0877.3968e8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 400,
+        "wires": [
+            [
+                "c5d06920d907b87a"
+            ]
+        ]
+    },
+    {
+        "id": "8608e552.4208d8",
+        "type": "debug",
+        "z": "3c7a0877.3968e8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "fe02a781.13d228",
+        "type": "inject",
+        "z": "3c7a0877.3968e8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 540,
+        "wires": [
+            [
+                "d36c4588277d9f8a"
+            ]
+        ]
+    },
+    {
+        "id": "2399ebf1.593174",
+        "type": "inject",
+        "z": "3c7a0877.3968e8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 200,
+        "wires": [
+            [
+                "af4970ec.2e627"
+            ]
+        ]
+    },
+    {
+        "id": "75c77c81.6966a4",
+        "type": "debug",
+        "z": "3c7a0877.3968e8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "c5d06920d907b87a",
+        "type": "cloudantplus in",
+        "z": "3c7a0877.3968e8",
+        "name": "",
+        "cloudant": "d105cfcc7d52fbe5",
+        "database": "backup-tagomat-raw",
+        "service": "_ext_",
+        "search": "_all_",
+        "design": "",
+        "index": "",
+        "x": 340,
+        "y": 420,
+        "wires": [
+            [
+                "8608e552.4208d8"
+            ]
+        ]
+    },
+    {
+        "id": "af4970ec.2e627",
+        "type": "Db2 in",
+        "z": "3c7a0877.3968e8",
+        "Db2": "56cc5ac1.3421e4",
+        "service": "_ext_",
+        "query": "SELECT * FROM BLUADMIN.AIRPORT_INFO FETCH FIRST 1 ROWS ONLY; ",
+        "params": "",
+        "name": "",
+        "x": 390,
+        "y": 240,
+        "wires": [
+            [
+                "75c77c81.6966a4"
+            ]
+        ]
+    },
+    {
+        "id": "d36c4588277d9f8a",
+        "type": "cloudantplus out",
+        "z": "3c7a0877.3968e8",
+        "name": "",
+        "cloudant": "d105cfcc7d52fbe5",
+        "database": "backup-tagomat-raw",
+        "service": "_ext_",
+        "payonly": true,
+        "operation": "insert",
+        "x": 420,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "51fdadbbde4a8e5b",
+        "type": "inject",
+        "z": "3c7a0877.3968e8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    }
+]
